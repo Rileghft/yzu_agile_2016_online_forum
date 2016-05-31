@@ -10,7 +10,6 @@ namespace online_forum_backend
         private string account;
         private string content;
         private string time;
-        private int articleID; //新增文章ID，這樣才知道是哪個文章的回覆
 
         public void setAccount(string Name)
         {
@@ -27,11 +26,6 @@ namespace online_forum_backend
             time = t;
         }
 
-        public void setArticleID(int id)
-        {
-            articleID = id;
-        }
-
         public string getAccount()
         {
             return account;
@@ -40,11 +34,6 @@ namespace online_forum_backend
         public string getContent()
         {
             return content;
-        }
-
-        public int getArticleID()
-        {
-            return articleID;
         }
 
         public string getTime()
