@@ -7,13 +7,11 @@ namespace online_forum_backend
     {
         public List<Account> accounts;
         public List<Article> articles;
-        public List<Comment> comments;
         
         public ForumDB()
         {
             accounts = new List<Account>();
             articles = new List<Article>();
-            comments = new List<Comment>();
             int id = accounts.Count;
             Account defaultAccount = new Account(id);
             defaultAccount.name = "teamD";
@@ -81,27 +79,29 @@ namespace online_forum_backend
 
         internal void insertComment(string text, string userName, int articleID)
         {
+            //新增留言到該ID文章
             Comment user = new Comment();
             user.setAccount(userName);
             user.setContent(text);
-            user.setArticleID(articleID);
             string time = DateTime.Now.TimeOfDay.ToString();
             user.setTime(time);
-            comments.Add(user);
+            foreach (Article article in articles)
+            {
+                if (article.articleID == articleID)
+                    article.comment.Add(user);
+            }
         }
 
         internal List<Comment> getComment(int articleID)
-        {  
-            //列出該文章ID的所有回覆
-            List<Comment> match = new List<Comment>();
-
-            foreach (Comment usr in comments)
+        {
+            //顯示該ID文章的所有回覆
+            List<Comment> empty = new List<Comment>();
+            foreach (Article article in articles)
             {
-                if (usr.getArticleID() == articleID)
-                    match.Add(usr);
+                if (article.articleID == articleID)
+                    return article.comment;
             }
-            return match;
+            return empty;
         }
-
     }
 }

@@ -98,15 +98,17 @@ namespace online_forum_backend
         public void 插入顯示文章()
         {
             ForumDB db = new ForumDB();
-            db.insertComment("這篇文章很讚", "cyZeng", 0); //插入
+
+            db.insertArticle("teamD", "測試新文章標題", "測試文章內容");//articleID 0
+            db.insertComment("這篇文章很讚", "cyZeng", 0); 
             db.insertComment("這篇文章很無聊", "Kevin", 0);
-            db.insertComment("我給87分，不能在高了", "Kevin", 0);
-            db.insertComment("Cool", "Lee", 3);
-            List<Comment> match = db.getComment(0);  //顯示0號文章的所有回覆
+            List<Comment> match = db.getComment(0);
             Assert.That("這篇文章很讚", Is.EqualTo(match[0].getContent()));
             Assert.That("這篇文章很無聊", Is.EqualTo(match[1].getContent()));
-            Assert.That("我給87分，不能在高了", Is.EqualTo(match[2].getContent()));
-            List<Comment> match2 = db.getComment(3);
+
+            db.insertArticle("teamD", "測試新文章標題2", "測試文章內容2");//articleID 1
+            db.insertComment("Cool", "Lee", 1);
+            List<Comment> match2 = db.getComment(1);
             Assert.That("Cool", Is.EqualTo(match2[0].getContent()));
         }
     }

@@ -15,6 +15,9 @@ namespace online_forum_backend
         public string time { get; set; }
         public List<Comment> comment { get; set; }
 
-
+        public Article()
+        {
+            comment = new List<Comment>();
+        }
     }
 }
