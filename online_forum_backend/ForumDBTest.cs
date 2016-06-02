@@ -119,5 +119,22 @@ namespace online_forum_backend
             Assert.That(false, Is.EqualTo(db.getArticle(3)));
             Assert.That(db.getArticle(0), Is.EqualTo(true));
         }
+
+         [Test]
+         public void 讀取文章列表()
+         {
+             ForumDB db = new ForumDB();
+
+             db.insertArticle("teamD", "測試新文章標題", "測試文章內容1");
+            db.insertArticle("teamD2", "測試新文章標題2", "測試文章內容2");
+             db.insertArticle("teamD3", "測試新文章標題3", "測試文章內容3");
+            
+              Assert.That(db.getTitle(0), Is.EqualTo("測試新文章標題"));
+              Assert.That(db.getTitle(1), Is.EqualTo("測試新文章標題"));
+              Assert.That(db.getTitle(2), Is.EqualTo("測試新文章標題"));
+           
+
+            
+         }
     }
 }

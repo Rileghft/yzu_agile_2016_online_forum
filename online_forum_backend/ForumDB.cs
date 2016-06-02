@@ -45,6 +45,19 @@ namespace online_forum_backend
             }
             else return false;
         }
+        internal bool getArticle(int id)
+        {
+            if (id >= articles.Count)
+                return false;
+            foreach (Article article in articles)
+            {
+                if (article.articleID == id)
+                    article.content.ToString();
+            }
+
+            return true;
+
+        }
 
         internal bool  insertArticle( string account, string title, string content )
         { // 如果沒有這個帳戶使用者，回傳false
@@ -100,21 +113,24 @@ namespace online_forum_backend
             {
                 if (article.articleID == articleID)
                     return article.comment;
+                    
             }
             return empty;
         }
-        internal bool getArticle(int id)
+   
+
+       internal string getTitle(int n)
         {
-            if (id >= articles.Count)
-                return false;
+
+            string[] artice = new String[20]; ;
+   
             foreach (Article article in articles)
             {
-                if (article.articleID == id)
-                    article.content.ToString();
+                if (article.articleID >= 0)
+                   artice[n] = article.title.ToString();
+               
             }
-
-            return true;
-
+            return artice[n];
         }
     }
 }
