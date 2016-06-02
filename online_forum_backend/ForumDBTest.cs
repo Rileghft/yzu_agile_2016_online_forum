@@ -111,5 +111,13 @@ namespace online_forum_backend
             List<Comment> match2 = db.getComment(1);
             Assert.That("Cool", Is.EqualTo(match2[0].getContent()));
         }
+         [Test]
+        public void 讀取文章內容()
+        {
+            ForumDB db = new ForumDB();
+            db.insertArticle("teamD", "測試新文章標題", "測試文章內容1");
+            Assert.That(false, Is.EqualTo(db.getArticle(3)));
+            Assert.That(db.getArticle(0), Is.EqualTo(true));
+        }
     }
 }

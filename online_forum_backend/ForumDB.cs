@@ -103,5 +103,18 @@ namespace online_forum_backend
             }
             return empty;
         }
+        internal bool getArticle(int id)
+        {
+            if (id >= articles.Count)
+                return false;
+            foreach (Article article in articles)
+            {
+                if (article.articleID == id)
+                    article.content.ToString();
+            }
+
+            return true;
+
+        }
     }
 }
