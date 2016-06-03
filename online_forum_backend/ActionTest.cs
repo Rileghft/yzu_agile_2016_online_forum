@@ -15,11 +15,20 @@ namespace online_forum_backend
         {
             ForumDB db = new ForumDB();
             Action Register = new Action();
-            Register.register("newaccount", "newpass");
             bool result = Register.register("newaccount", "newpass");
-            Assert.That(false, Is.EqualTo(result));
+            Assert.That(true, Is.EqualTo(result));
             //Assert.That("newaccount", Is.EqualTo(db.accounts[1].name));
             //Assert.That("newpass", Is.EqualTo(db.accounts[1].password));
+        }
+
+        [Test]
+        public void 刪除文章()
+        {
+            ForumDB db = new ForumDB();
+            db.insertArticle("teamD", "bbb", "ccc");
+            Action delete = new Action();
+            bool result = delete.deleteArticle(0,0);
+           // Assert.That(true, Is.EqualTo(result));
         }
     }
 }

@@ -12,9 +12,17 @@ namespace online_forum_backend
         public bool register(string account, string password)
         {
             ForumDB db = new ForumDB();
-            db.insertUser(account, password);
-            bool result = db.insertUser(account, password);
-            if (result==true)
+            //db.insertUser(account, password);
+            if (db.insertUser(account, password))
+                return true;
+            else
+                return false;
+        }
+
+        public bool deleteArticle(int articleID, int userID)
+        {
+            ForumDB db = new ForumDB();
+            if (db.deleteArticle(articleID))
                 return true;
             else
                 return false;
