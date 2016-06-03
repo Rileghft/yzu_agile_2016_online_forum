@@ -68,6 +68,7 @@
     <Compile Include="Comment.cs" />
     <Compile Include="ForumDB.cs" />
     <Compile Include="ForumDBTest.cs" />
+    <Compile Include="getAriticalHeaderList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Action.cs" />
