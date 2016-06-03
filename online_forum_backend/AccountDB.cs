@@ -23,7 +23,7 @@ namespace online_forum_backend
             get;
             set;
         }
-         public AccountDB(int id)
+        public AccountDB(int id)
         {
             userID = id;
         }
@@ -42,6 +42,13 @@ namespace online_forum_backend
             return password;
         }
 
+
+
+        public string content { get; set; }
+
+        public string time { get; set; }
+
+        public string userName { get; set; }
     }
- 
+
 }

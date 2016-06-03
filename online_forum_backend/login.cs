@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace online_forum_backend
 {
-    class login
+    internal class login
     {
         public List<AccountDB> accounts;
+        //public List<AccountDB> contents;
         public login()
         {
             accounts = new List<AccountDB>();
             int id = accounts.Count;
             AccountDB SomeUser = new AccountDB(id);
+            //SomeUser.userID = 123;
             SomeUser.name = "lee";
             SomeUser.password = "1234";
             accounts.Add(SomeUser);
@@ -36,5 +38,22 @@ namespace online_forum_backend
             return account;
 
         }
+        internal bool addArticle(string userName, string content)
+        {
+            int i;
+            for (i = 0; i < accounts.Count; i++)
+                if (accounts[i].name == userName.ToString())
+                    break;
+            if (i == accounts.Count)
+                return false;
+            AccountDB contents = null;
+            int id = accounts.Count;
+            contents.userName = userName;
+            contents.content = content;
+            accounts.Add(contents);
+            return true;
+
+        }
     }
+
 }
