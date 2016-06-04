@@ -10,7 +10,6 @@ namespace online_forum_backend
     class Action
     {
         public bool register(ForumDB db, string account, string password ,string cofirmpass)
-
         {
             string[] special = {"!","@","#","$","%","^","&","*","(",")","_","=","<",">","/"};
             for (int i = 0; i < special.Count(); i++)
@@ -32,7 +31,7 @@ namespace online_forum_backend
         }
 
 
-        public bool deleteArticle(int articleID, Account user, ForumDB db) // modify parameter
+        public bool deleteArticle(ForumDB db, int articleID, Account user) // modify parameter
         {
             // 判斷刪除文章是否為作者本人
             if (articleID >= db.articles.Count)

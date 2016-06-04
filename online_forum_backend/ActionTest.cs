@@ -55,7 +55,7 @@ namespace online_forum_backend
             Assert.That(true,  Is.EqualTo(db.insertArticle("teamD", "bbb", "ccc")));          
             Action delete = new Action();
 
-            bool result = delete.deleteArticle(0,db.accounts[0],db);
+            bool result = delete.deleteArticle(db,0,db.accounts[0]);
             Assert.That(true, Is.EqualTo(result));
            // Assert.That(true, Is.EqualTo(result));
 
