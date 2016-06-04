@@ -79,10 +79,6 @@ namespace online_forum_backend
             return result;
         }
 
-            db.articles[articleID].title = title;
-            return true;
-        }
-
         public bool modifyArticleContent(ForumDB db, int articleID, Account user, string content)
         {
             if (articleID >= db.articles.Count)
