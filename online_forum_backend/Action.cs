@@ -9,6 +9,9 @@ namespace online_forum_backend
 
     class Action
     {
+        public Account user;
+        public bool loggedin;
+
         public bool register(ForumDB db, string account, string password ,string cofirmpass)
         {
             string[] special = {"!","@","#","$","%","^","&","*","(",")","_","=","<",">","/"};
@@ -30,7 +33,29 @@ namespace online_forum_backend
                 return false;
         }
 
+        public bool signin(ForumDB db, string account, string password)
+        {
+            user = db.getUser(account, password);
+            if (user != null)
+                return true;
+            else
+                return false;
 
+        }
+        public string signout(ForumDB db)
+        {
+            loggedin = db.isLogin(user);
+            if (loggedin = true)
+            {
+                user = null;
+                return "log out ";
+            }
+            else
+            {
+                return "please log in firstly!";
+            }
+
+        }
         public bool deleteArticle(ForumDB db, int articleID, Account user) // modify parameter
         {
             // 判斷刪除文章是否為作者本人
