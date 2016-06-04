@@ -38,5 +38,11 @@ namespace online_forum_backend
             else
                 return false;
         }
+
+
+        internal string getArticleHeaderList(ForumDB db,int ArticleID)
+        {
+            db.getArticle(ArticleID);
+        }
     }
 }

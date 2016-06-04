@@ -49,6 +49,16 @@ namespace online_forum_backend
         }
 
         [Test]
+        public void 取得文章標題_Action()
+        {
+            ForumDB db = new ForumDB();
+            Action Title = new Action();
+            db.insertArticle("teamD","For_Test","Hello world");
+            string result = Title.getArticleHeaderList(db,1);
+            Assert.That("For_Test", Is.EqualTo(result));
+        }
+
+        [Test]
         public void 刪除文章_Action()
         {
             ForumDB db = new ForumDB();
