@@ -92,7 +92,6 @@ namespace online_forum_backend
             arti.time = thisDay.ToString();
             articles.Add(arti);
             return true;
-
         }
 
 

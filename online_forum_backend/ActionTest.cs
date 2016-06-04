@@ -59,6 +59,16 @@ namespace online_forum_backend
         }
 
         [Test]
+        public void 取得文章標題_更新日期_Action()
+        {
+            ForumDB db = new ForumDB();
+            Action Title = new Action();
+            db.insertArticle("teamD", "For_Test", "Hello world");
+            string result = Title.getArticleHeaderList(db, 1);
+            Assert.That("2016/6/4 上午 12:00:00", Is.EqualTo(db.articles[0].time));
+        }
+
+        [Test]
         public void 刪除文章_Action()
         {
             ForumDB db = new ForumDB();

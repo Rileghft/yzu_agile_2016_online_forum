@@ -49,7 +49,9 @@ namespace online_forum_backend
 
         internal string getArticleHeaderList(ForumDB db,int ArticleID)
         {
-            db.getArticle(ArticleID);
+            string result;
+            result = db.getTitle(ArticleID);
+            return result;
         }
     }
 }
