@@ -9,6 +9,9 @@ namespace online_forum_backend
 
     class Action
     {
+        
+
+
         public bool register(string account, string password)
         {
             ForumDB db = new ForumDB();
@@ -19,9 +22,15 @@ namespace online_forum_backend
                 return false;
         }
 
-        public bool deleteArticle(int articleID, int userID)
+        public bool deleteArticle(int articleID, Account user, ForumDB db) // modify parameter
         {
-            ForumDB db = new ForumDB();
+            // 判斷刪除文章是否為作者本人
+            if (articleID >= db.articles.Count)
+                return false;
+
+            if (db.articles[articleID].account != user.getName())
+                return false;
+
             if (db.deleteArticle(articleID))
                 return true;
             else
