@@ -127,16 +127,18 @@ namespace online_forum_backend
         }
    
 
-       internal void grtTitle(string title)
+       internal string getTitle(int n)
         {
 
-            Article arti = new Article();
+            string[] artice = new String[20]; ;
+   
             foreach (Article article in articles)
             {
-                if (article.articleID >= 0)            
-            arti.title = title;
+                if (article.articleID >= 0)
+                   artice[n] = article.title.ToString();
                
             }
+            return artice[n];
         }
     }
 }
