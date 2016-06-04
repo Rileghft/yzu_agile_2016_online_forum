@@ -46,8 +46,7 @@ namespace online_forum_backend
             else return false;
         }
 
-<<<<<<< HEAD
-=======
+
         internal bool isLogin(Account user)
         {
             bool isExist = false;
@@ -72,7 +71,6 @@ namespace online_forum_backend
             }
 
             return true;
->>>>>>> eac6625019961e446301d77c5eb169cdddf3244f
 
         }
 
@@ -161,14 +159,14 @@ namespace online_forum_backend
             Article arti = new Article();
             foreach (Article article in articles)
             {
-<<<<<<< HEAD
+
                 if (article.articleID >= 0)            
             arti.title = title;
                
-=======
+
                 if (article.articleID >= 0)
                    artice[n] = article.title.ToString();
->>>>>>> eac6625019961e446301d77c5eb169cdddf3244f
+
             }
         }
     }
