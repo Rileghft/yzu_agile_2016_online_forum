@@ -30,6 +30,24 @@ namespace online_forum_backend
         }
 
         [Test]
+        public void 確認已經登入()
+        {
+            ForumDB db = new ForumDB();
+            Account account = db.getUser("teamD", "test");
+            bool isLogin = db.isLogin(account);
+            Assert.That(true, Is.EqualTo(isLogin));
+        }
+
+        [Test]
+        public void 拒絕未登入使用者()
+        {
+            ForumDB db = new ForumDB();
+            Account account = db.getUser("cracker", "12345");
+            bool isLogin = db.isLogin(account);
+            Assert.That(false, Is.EqualTo(isLogin));
+        }
+
+        [Test]
         public void 插入新文章()
         {
             ForumDB db = new ForumDB();
