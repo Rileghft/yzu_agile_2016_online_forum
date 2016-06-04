@@ -46,6 +46,20 @@ namespace online_forum_backend
             else return false;
         }
 
+        internal bool isLogin(Account user)
+        {
+            bool isExist = false;
+            foreach (Account account in accounts)
+            {
+                if (user == account)
+                {
+                    isExist = true;
+                }
+            }
+            return isExist;
+        }
+
+
 
         internal bool insertArticle(string account, string title, string content)
         { 
@@ -140,5 +154,8 @@ namespace online_forum_backend
             }
             return artice[n];
         }
+
+
+
     }
 }

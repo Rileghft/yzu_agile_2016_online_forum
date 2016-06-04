@@ -11,24 +11,54 @@ namespace online_forum_backend
     class ActionTest
     {
         [Test]
-        public void 註冊新用戶()
+        public void 註冊新用戶_Action()
         {
             ForumDB db = new ForumDB();
             Action Register = new Action();
-            bool result = Register.register("newaccount", "newpass");
+            bool result = Register.register(db,"newaccount", "newpass","newpass");
             Assert.That(true, Is.EqualTo(result));
-            //Assert.That("newaccount", Is.EqualTo(db.accounts[1].name));
-            //Assert.That("newpass", Is.EqualTo(db.accounts[1].password));
+            Assert.That("newaccount", Is.EqualTo(db.accounts[1].name));
+            Assert.That("newpass", Is.EqualTo(db.accounts[1].password));
         }
 
         [Test]
-        public void 刪除文章()
+        public void 註冊新用戶_包含特殊字符_Action()
         {
             ForumDB db = new ForumDB();
-            db.insertArticle("teamD", "bbb", "ccc");
+            Action Register = new Action();
+            bool result = Register.register(db, "********", "********","*******");
+            Assert.That(false, Is.EqualTo(result));
+        }
+
+        [Test]
+        public void 註冊新用戶_密碼長度不合_Action()
+        {
+            ForumDB db = new ForumDB();
+            Action Register = new Action();
+            bool result = Register.register(db, "123", "123","123");
+            Assert.That(false, Is.EqualTo(result));
+        }
+
+        [Test]
+        public void 註冊新用戶_第二字密碼不符_Action()
+        {
+            ForumDB db = new ForumDB();
+            Action Register = new Action();
+            bool result = Register.register(db, "1234567", "1234567", "12345678");
+            Assert.That(false, Is.EqualTo(result));
+        }
+
+        [Test]
+        public void 刪除文章_Action()
+        {
+            ForumDB db = new ForumDB();
+            Assert.That(true,  Is.EqualTo(db.insertArticle("teamD", "bbb", "ccc")));          
             Action delete = new Action();
-            bool result = delete.deleteArticle(0,0);
+
+            bool result = delete.deleteArticle(db,0,db.accounts[0]);
+            Assert.That(true, Is.EqualTo(result));
            // Assert.That(true, Is.EqualTo(result));
+
         }
     }
 }

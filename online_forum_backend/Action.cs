@@ -9,19 +9,37 @@ namespace online_forum_backend
 
     class Action
     {
-        public bool register(string account, string password)
+        public bool register(ForumDB db, string account, string password ,string cofirmpass)
         {
-            ForumDB db = new ForumDB();
-            //db.insertUser(account, password);
+            string[] special = {"!","@","#","$","%","^","&","*","(",")","_","=","<",">","/"};
+            for (int i = 0; i < special.Count(); i++)
+            {
+                if (account.Contains(special[i]))
+                    return false;
+            }
+
+            if (password.Count() < 6 || password.Count() > 16)
+                return false;
+
+            if (password != cofirmpass)
+                return false;
+
             if (db.insertUser(account, password))
                 return true;
             else
                 return false;
         }
 
-        public bool deleteArticle(int articleID, int userID)
+
+        public bool deleteArticle(ForumDB db, int articleID, Account user) // modify parameter
         {
-            ForumDB db = new ForumDB();
+            // 判斷刪除文章是否為作者本人
+            if (articleID >= db.articles.Count)
+                return false;
+
+            if (db.articles[articleID].account != user.getName())
+                return false;
+
             if (db.deleteArticle(articleID))
                 return true;
             else
