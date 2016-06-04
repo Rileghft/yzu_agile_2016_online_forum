@@ -83,5 +83,17 @@ namespace online_forum_backend
             return true;
         }
 
+        public bool modifyArticleContent(ForumDB db, int articleID, Account user, string content)
+        {
+            if (articleID >= db.articles.Count)
+                return false;
+
+            if (db.articles[articleID].account != user.getName())
+                return false;
+
+            db.articles[articleID].content = content;
+            return true;
+        }
+
     }
 }
