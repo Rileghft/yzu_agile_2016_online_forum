@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+// test
 namespace online_forum_backend
 {
     [TestFixture]
@@ -27,24 +27,6 @@ namespace online_forum_backend
             Assert.That(true, Is.EqualTo(isSuccess));
             Assert.That("test", Is.EqualTo(db.accounts[1].name));
             Assert.That("1234", Is.EqualTo(db.accounts[1].password));
-        }
-
-        [Test]
-        public void 確認已經登入()
-        {
-            ForumDB db = new ForumDB();
-            Account account = db.getUser("teamD", "test");
-            bool isLogin = db.isLogin(account);
-            Assert.That(true, Is.EqualTo(isLogin));
-        }
-
-        [Test]
-        public void 拒絕未登入使用者()
-        {
-            ForumDB db = new ForumDB();
-            Account account = db.getUser("cracker", "12345");
-            bool isLogin = db.isLogin(account);
-            Assert.That(false, Is.EqualTo(isLogin));
         }
 
         [Test]
@@ -133,26 +115,24 @@ namespace online_forum_backend
         public void 讀取文章內容()
         {
             ForumDB db = new ForumDB();
-            db.insertArticle("teamD", "測試新文章標題", "測試文章內容1");
-            Assert.That(false, Is.EqualTo(db.getArticle(3)));
-            Assert.That(db.getArticle(0), Is.EqualTo(true));
+
+            db.insertArticle("teamD", "測試新文章標題", "測試文章內容");
+            Assert.That(true, Is.EqualTo(db.getArticle(0,"teamD", "測試新文章標題", "測試文章內容")));
+            Assert.That("teamD", Is.EqualTo(db.articles[0].account));
+            Assert.That("測試新文章標題", Is.EqualTo(db.articles[0].title));
+            Assert.That("測試文章內容", Is.EqualTo(db.articles[0].content));
+            Assert.That(0, Is.EqualTo(db.articles[0].articleID));
+           
         }
 
          [Test]
          public void 讀取文章列表()
          {
              ForumDB db = new ForumDB();
-
-             db.insertArticle("teamD", "測試新文章標題", "測試文章內容1");
-            db.insertArticle("teamD2", "測試新文章標題2", "測試文章內容2");
-             db.insertArticle("teamD3", "測試新文章標題3", "測試文章內容3");
-            
-              Assert.That(db.getTitle(0), Is.EqualTo("測試新文章標題"));
-              Assert.That(db.getTitle(1), Is.EqualTo("測試新文章標題"));
-              Assert.That(db.getTitle(2), Is.EqualTo("測試新文章標題"));
-           
-
-            
+             db.insertArticle("teamD", "測試新文章標題", "測試文章內容");
+         //    db.insertArticle("teamD1", "測試新文章標題1", "測試文章內容1");
+               Assert.That("測試新文章標題", Is.EqualTo(db.articles[0].title));
+             //  Assert.That("測試新文章標題1", Is.EqualTo(db.articles[1].title));
          }
     }
 }

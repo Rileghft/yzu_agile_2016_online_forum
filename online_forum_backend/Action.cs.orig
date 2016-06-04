@@ -37,20 +37,16 @@ namespace online_forum_backend
         {
             user = db.getUser(account, password);
             if (user != null)
-            {
-                loggedin = true;
                 return true;
-            }
             else
                 return false;
 
         }
-
         public string signout(ForumDB db)
         {
-            if (loggedin)
+            loggedin = db.isLogin(user);
+            if (loggedin = true)
             {
-                loggedin = false;
                 user = null;
                 return "log out ";
             }
@@ -83,6 +79,10 @@ namespace online_forum_backend
             return result;
         }
 
+            db.articles[articleID].title = title;
+            return true;
+        }
+
         public bool modifyArticleContent(ForumDB db, int articleID, Account user, string content)
         {
             if (articleID >= db.articles.Count)
@@ -95,11 +95,5 @@ namespace online_forum_backend
             return true;
         }
 
-                string content;
-                content = Console.ReadLine();
-                db.insertComment(content, user.name, art.articleID);
-            }
-
-        }
     }
 }
