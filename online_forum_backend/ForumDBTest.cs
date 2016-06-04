@@ -115,9 +115,14 @@ namespace online_forum_backend
         public void 讀取文章內容()
         {
             ForumDB db = new ForumDB();
-            db.insertArticle("teamD", "測試新文章標題", "測試文章內容1");
-            Assert.That(false, Is.EqualTo(db.getArticle(3)));
-            Assert.That(db.getArticle(0), Is.EqualTo(true));
+
+            db.insertArticle("teamD", "測試新文章標題", "測試文章內容");
+            Assert.That(true, Is.EqualTo(db.getArticle(0,"teamD", "測試新文章標題", "測試文章內容")));
+            Assert.That("teamD", Is.EqualTo(db.articles[0].account));
+            Assert.That("測試新文章標題", Is.EqualTo(db.articles[0].title));
+            Assert.That("測試文章內容", Is.EqualTo(db.articles[0].content));
+            Assert.That(0, Is.EqualTo(db.articles[0].articleID));
+           
         }
 
          [Test]
