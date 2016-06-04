@@ -46,9 +46,38 @@ namespace online_forum_backend
             else return false;
         }
 
+<<<<<<< HEAD
+=======
+        internal bool isLogin(Account user)
+        {
+            bool isExist = false;
+            foreach (Account account in accounts)
+            {
+                if (user == account)
+                {
+                    isExist = true;
+                }
+            }
+            return isExist;
+        }
 
-        internal bool insertArticle(string account, string title, string content)
-        { 
+        internal bool getArticle(int id)
+        {
+            if (id >= articles.Count)
+                return false;
+            foreach (Article article in articles)
+            {
+                if (article.articleID == id)
+                    article.content.ToString();
+            }
+
+            return true;
+>>>>>>> eac6625019961e446301d77c5eb169cdddf3244f
+
+        }
+
+        internal bool  insertArticle( string account, string title, string content )
+        { // 如果沒有這個帳戶使用者，回傳false
             int i;
             for (i = 0; i < accounts.Count; i++)
                 if (accounts[i].name == account)
@@ -57,7 +86,7 @@ namespace online_forum_backend
                 return false;
 
             Article arti = new Article();
-          int  id = articles.Count;
+            int id = articles.Count;
             arti.account = account;
             arti.title = title;
             arti.content = content;
@@ -66,7 +95,6 @@ namespace online_forum_backend
             arti.time = thisDay.ToString();
             articles.Add(arti);
             return true;
-
         }
 
 
@@ -133,9 +161,14 @@ namespace online_forum_backend
             Article arti = new Article();
             foreach (Article article in articles)
             {
+<<<<<<< HEAD
                 if (article.articleID >= 0)            
             arti.title = title;
                
+=======
+                if (article.articleID >= 0)
+                   artice[n] = article.title.ToString();
+>>>>>>> eac6625019961e446301d77c5eb169cdddf3244f
             }
         }
     }
