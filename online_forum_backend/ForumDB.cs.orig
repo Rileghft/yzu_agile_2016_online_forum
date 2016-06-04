@@ -45,28 +45,24 @@ namespace online_forum_backend
             }
             else return false;
         }
+
 <<<<<<< HEAD
 
-
-        internal bool insertArticle(string account, string title, string content)
-        { 
-            int i;
-            for (i = 0; i < accounts.Count; i++)
-                if (accounts[i].name == account)
-                    break;
-            if (i == accounts.Count)
-                return false;
-
-            Article arti = new Article();
-          int  id = articles.Count;
-            arti.account = account;
-            arti.title = title;
-            arti.content = content;
-            arti.articleID = id;
-            DateTime thisDay = DateTime.Today;
-            arti.time = thisDay.ToString();
-            articles.Add(arti);
 =======
+>>>>>>> 9a09977f4756f7ced4bd02fa611e82a34a832bb5
+        internal bool isLogin(Account user)
+        {
+            bool isExist = false;
+            foreach (Account account in accounts)
+            {
+                if (user == account)
+                {
+                    isExist = true;
+                }
+            }
+            return isExist;
+        }
+
         internal bool getArticle(int id)
         {
             if (id >= articles.Count)
@@ -77,19 +73,15 @@ namespace online_forum_backend
                     article.content.ToString();
             }
 
->>>>>>> eac6625019961e446301d77c5eb169cdddf3244f
             return true;
-
-        }
-
 <<<<<<< HEAD
 
-        internal bool  getArticle( int id,string account, string title, string content /*,string time*/)
-        { 
 =======
+>>>>>>> 9a09977f4756f7ced4bd02fa611e82a34a832bb5
+        }
+
         internal bool  insertArticle( string account, string title, string content )
         { // 如果沒有這個帳戶使用者，回傳false
->>>>>>> eac6625019961e446301d77c5eb169cdddf3244f
             int i;
             for (i = 0; i < accounts.Count; i++)
                 if (accounts[i].name == account)
@@ -98,21 +90,33 @@ namespace online_forum_backend
                 return false;
 
             Article arti = new Article();
-<<<<<<< HEAD
-=======
             int id = articles.Count;
->>>>>>> eac6625019961e446301d77c5eb169cdddf3244f
             arti.account = account;
             arti.title = title;
             arti.content = content;
             arti.articleID = id;
-<<<<<<< HEAD
-            //arti.time = time;
-=======
             DateTime thisDay = DateTime.Today;
             arti.time = thisDay.ToString();
             articles.Add(arti);
->>>>>>> eac6625019961e446301d77c5eb169cdddf3244f
+            return true;
+        }
+
+
+        internal bool  getArticle( int id,string account, string title, string content /*,string time*/)
+        { 
+            int i;
+            for (i = 0; i < accounts.Count; i++)
+                if (accounts[i].name == account)
+                    break;
+            if (i == accounts.Count)
+                return false;
+
+            Article arti = new Article();
+            arti.account = account;
+            arti.title = title;
+            arti.content = content;
+            arti.articleID = id;
+            //arti.time = time;
             return true;
 
         }
@@ -155,27 +159,21 @@ namespace online_forum_backend
         }
    
 
-       internal string getTitle(int n)
+       internal void grtTitle(string title)
         {
 
-            string[] artice = new String[20]; ;
-   
+            Article arti = new Article();
             foreach (Article article in articles)
             {
+
+                if (article.articleID >= 0)            
+            arti.title = title;
+               
+
                 if (article.articleID >= 0)
                    artice[n] = article.title.ToString();
-<<<<<<< HEAD
-               
+
             }
-            return artice[n];
         }
-=======
-            }
-            return artice[n];
-        }
-
-
-
->>>>>>> eac6625019961e446301d77c5eb169cdddf3244f
     }
 }
