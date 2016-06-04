@@ -37,16 +37,20 @@ namespace online_forum_backend
         {
             user = db.getUser(account, password);
             if (user != null)
+            {
+                loggedin = true;
                 return true;
+            }
             else
                 return false;
 
         }
+
         public string signout(ForumDB db)
         {
-            loggedin = db.isLogin(user);
-            if (loggedin = true)
+            if (loggedin)
             {
+                loggedin = false;
                 user = null;
                 return "log out ";
             }

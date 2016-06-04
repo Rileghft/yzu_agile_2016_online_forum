@@ -82,5 +82,35 @@ namespace online_forum_backend
             Assert.That("更新文章標題22", Is.EqualTo(db.articles[1].title));
 
         }
+
+        [Test]
+        public void 登入()
+        {
+            ForumDB db = new ForumDB();
+            Action action = new Action();
+            bool isLogin = action.signin(db, "teamD", "test");
+            Assert.That(true, Is.EqualTo(isLogin));
+        }
+
+        [Test]
+        public void 登入失敗()
+        {
+            ForumDB db = new ForumDB();
+            Action action = new Action();
+            bool isLogin = action.signin(db, "teamA", "1234");
+            Assert.That(false, Is.EqualTo(isLogin));
+        }
+
+        [Test]
+        public void 登出()
+        {
+            ForumDB db = new ForumDB();
+            Action action = new Action();
+            bool isLogin = action.signin(db, "teamD", "test");
+            Assert.That(true, Is.EqualTo(action.loggedin));
+            action.signout(db);
+            Assert.That(null, Is.EqualTo(action.user));
+            Assert.That(false, Is.EqualTo(action.loggedin));
+        }
     }
 }
