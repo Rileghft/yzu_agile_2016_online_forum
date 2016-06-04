@@ -46,8 +46,6 @@ namespace online_forum_backend
             else return false;
         }
 
-<<<<<<< HEAD
-=======
         internal bool isLogin(Account user)
         {
             bool isExist = false;
@@ -72,8 +70,6 @@ namespace online_forum_backend
             }
 
             return true;
->>>>>>> eac6625019961e446301d77c5eb169cdddf3244f
-
         }
 
         internal bool  insertArticle( string account, string title, string content )
