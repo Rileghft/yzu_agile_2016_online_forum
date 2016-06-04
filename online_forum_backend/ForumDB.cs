@@ -59,22 +59,10 @@ namespace online_forum_backend
             return isExist;
         }
 
-        internal bool getArticle(int id)
-        {
-            if (id >= articles.Count)
-                return false;
-            foreach (Article article in articles)
-            {
-                if (article.articleID == id)
-                    article.content.ToString();
-            }
 
-            return true;
 
-        }
-
-        internal bool  insertArticle( string account, string title, string content )
-        { // 如果沒有這個帳戶使用者，回傳false
+        internal bool insertArticle(string account, string title, string content)
+        { 
             int i;
             for (i = 0; i < accounts.Count; i++)
                 if (accounts[i].name == account)
@@ -83,7 +71,7 @@ namespace online_forum_backend
                 return false;
 
             Article arti = new Article();
-            int id = articles.Count;
+          int  id = articles.Count;
             arti.account = account;
             arti.title = title;
             arti.content = content;
@@ -91,6 +79,26 @@ namespace online_forum_backend
             DateTime thisDay = DateTime.Today;
             arti.time = thisDay.ToString();
             articles.Add(arti);
+            return true;
+
+        }
+
+
+        internal bool  getArticle( int id,string account, string title, string content /*,string time*/)
+        { 
+            int i;
+            for (i = 0; i < accounts.Count; i++)
+                if (accounts[i].name == account)
+                    break;
+            if (i == accounts.Count)
+                return false;
+
+            Article arti = new Article();
+            arti.account = account;
+            arti.title = title;
+            arti.content = content;
+            arti.articleID = id;
+            //arti.time = time;
             return true;
 
         }
