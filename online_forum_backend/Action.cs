@@ -27,5 +27,32 @@ namespace online_forum_backend
             else
                 return false;
         }
+        public void addArticle(ForumDB db, Account user)
+        {
+            string account = user.name;
+            string title;
+            title = Console.ReadLine();
+            string content;
+            content = Console.ReadLine();
+            if(!db.insertArticle(account,title,content))
+            {
+                Console.Write("Error");
+            }
+
+        }
+        public void addComment(ForumDB db, Account user,Article art)
+        {
+            if(!db.isLogin(user))
+            {
+                Console.Write("Error");
+            }
+            else
+            {
+                string content;
+                content = Console.ReadLine();
+                db.insertComment(content, user.name, art.articleID);
+            }
+
+        }
     }
 }

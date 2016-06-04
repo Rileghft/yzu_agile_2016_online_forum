@@ -30,5 +30,14 @@ namespace online_forum_backend
             bool result = delete.deleteArticle(0,0);
            // Assert.That(true, Is.EqualTo(result));
         }
+
+         [Test]
+        public void 新增文章()
+        {
+            ForumDB db = new ForumDB();
+            db.insertArticle("teamD", "測試標題", "測試內容");
+            Assert.That("測試標題", Is.EqualTo(db.getTitle(0)));
+            //Assert.That("測試內容", Is.EqualTo(db.getArticle(0)));
+        }
     }
 }
