@@ -31,8 +31,15 @@ namespace online_forum_backend
         }
 
 
-        public bool deleteArticle(ForumDB db ,int articleID, int userID)
+        public bool deleteArticle(ForumDB db, int articleID, Account user) // modify parameter
         {
+            // 判斷刪除文章是否為作者本人
+            if (articleID >= db.articles.Count)
+                return false;
+
+            if (db.articles[articleID].account != user.getName())
+                return false;
+
             if (db.deleteArticle(articleID))
                 return true;
             else

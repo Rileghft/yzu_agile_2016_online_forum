@@ -62,10 +62,13 @@ namespace online_forum_backend
         public void 刪除文章_Action()
         {
             ForumDB db = new ForumDB();
-            db.insertArticle("teamD", "bbb", "ccc");
+            Assert.That(true,  Is.EqualTo(db.insertArticle("teamD", "bbb", "ccc")));          
             Action delete = new Action();
-            bool result = delete.deleteArticle(db,0,0);
-            //Assert.That(true, Is.EqualTo(result));
+
+            bool result = delete.deleteArticle(db,0,db.accounts[0]);
+            Assert.That(true, Is.EqualTo(result));
+           // Assert.That(true, Is.EqualTo(result));
+
         }
     }
 }
