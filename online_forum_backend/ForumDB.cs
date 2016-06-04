@@ -45,6 +45,20 @@ namespace online_forum_backend
             }
             else return false;
         }
+
+        internal bool isLogin(Account user)
+        {
+            bool isExist = false;
+            foreach (Account account in accounts)
+            {
+                if (user == account)
+                {
+                    isExist = true;
+                }
+            }
+            return isExist;
+        }
+
         internal bool getArticle(int id)
         {
             if (id >= articles.Count)
@@ -132,5 +146,8 @@ namespace online_forum_backend
             }
             return artice[n];
         }
+
+
+
     }
 }
