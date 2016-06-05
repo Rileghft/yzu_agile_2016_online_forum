@@ -95,11 +95,5 @@ namespace online_forum_backend
             return true;
         }
 
-                string content;
-                content = Console.ReadLine();
-                db.insertComment(content, user.name, art.articleID);
-            }
-
-        }
     }
 }
