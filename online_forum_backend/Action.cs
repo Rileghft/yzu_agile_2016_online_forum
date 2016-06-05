@@ -94,6 +94,17 @@ namespace online_forum_backend
             db.articles[articleID].content = content;
             return true;
         }
+        
+        public bool modifyArticleTitle(ForumDB db, int articleID, Account user, string title)
+        {
+            if (articleID >= db.articles.Count)
+               return false;
+            if (db.articles[articleID].account != user.getName())
+               return false;
+            db.articles[articleID].title = title;
+            return true;
+        }
+ 
 
     }
 }

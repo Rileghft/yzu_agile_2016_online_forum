@@ -153,7 +153,7 @@ namespace online_forum_backend
         }
    
 
-       internal void grtTitle(string title)
+   /*    internal void getTitle(string title)
         {
 
             Article arti = new Article();
@@ -165,9 +165,25 @@ namespace online_forum_backend
                
 
                 if (article.articleID >= 0)
-                   artice[n] = article.title.ToString();
+                   article[n] = article.title.ToString();
 
             }
+        }*/
+
+
+        internal void getTitle(string title)
+        {
+
+
+            Article arti = new Article();
+            foreach (Article article in articles)
+            {
+
+                if (article.articleID >= 0)
+                    arti.title = title;
+
+            }
+
         }
     }
 }
