@@ -40,16 +40,16 @@ namespace online_forum_backend
             Assert.That("測試新文章標題"  , Is.EqualTo(db.articles[0].title));
             Assert.That("測試文章內容"    , Is.EqualTo(db.articles[0].content));
             Assert.That(0                 , Is.EqualTo(db.articles[0].articleID));
-            DateTime thisDay = DateTime.Today;
-            Assert.That(thisDay.ToString(), Is.EqualTo(db.articles[0].time));
+            //DateTime thisDay = DateTime.Today;
+            Assert.That(DateTime.Now.ToLongDateString().ToString(), Is.EqualTo(db.articles[0].time));
 
             Assert.That(true, Is.EqualTo( db.insertArticle("teamD", "測試新文章標題2", "測試文章內容2")));
             Assert.That("teamD"           , Is.EqualTo(db.articles[1].account));
             Assert.That("測試新文章標題2" , Is.EqualTo(db.articles[1].title));
             Assert.That("測試文章內容2"   , Is.EqualTo(db.articles[1].content));
             Assert.That(1                 , Is.EqualTo(db.articles[1].articleID));
-            thisDay = DateTime.Today;
-            Assert.That(thisDay.ToString(), Is.EqualTo(db.articles[1].time));
+            //thisDay = DateTime.Today;
+            Assert.That(DateTime.Now.ToLongDateString().ToString(), Is.EqualTo(db.articles[1].time));
 
         }
 

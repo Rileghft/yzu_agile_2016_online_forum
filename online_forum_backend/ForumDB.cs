@@ -89,8 +89,8 @@ namespace online_forum_backend
             arti.title = title;
             arti.content = content;
             arti.articleID = id;
-            DateTime thisDay = DateTime.Today;
-            arti.time = thisDay.ToString();
+            //DateTime thisDay = DateTime.Today;
+            arti.time = DateTime.Now.ToLongDateString().ToString();
             articles.Add(arti);
             return true;
         }
@@ -153,37 +153,16 @@ namespace online_forum_backend
         }
    
 
-   /*    internal void getTitle(string title)
+       internal string getTitle(int n)
         {
-
-            Article arti = new Article();
             foreach (Article article in articles)
             {
 
-                if (article.articleID >= 0)            
-            arti.title = title;
-               
-
-                if (article.articleID >= 0)
-                   article[n] = article.title.ToString();
+                if (article.articleID == n)
+                   return  article.title.ToString();
 
             }
-        }*/
-
-
-        internal void getTitle(string title)
-        {
-
-
-            Article arti = new Article();
-            foreach (Article article in articles)
-            {
-
-                if (article.articleID >= 0)
-                    arti.title = title;
-
-            }
-
+            return "None";
         }
     }
 }

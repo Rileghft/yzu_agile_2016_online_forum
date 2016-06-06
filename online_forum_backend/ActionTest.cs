@@ -54,7 +54,7 @@ namespace online_forum_backend
             ForumDB db = new ForumDB();
             Action Title = new Action();
             db.insertArticle("teamD","For_Test","Hello world");
-            string result = Title.getArticleHeaderList(db,1);
+            string result = Title.getArticleHeaderList(db,0);
             Assert.That("For_Test", Is.EqualTo(result));
         }
 
@@ -65,7 +65,7 @@ namespace online_forum_backend
             Action Title = new Action();
             db.insertArticle("teamD", "For_Test", "Hello world");
             string result = Title.getArticleHeaderList(db, 1);
-            Assert.That("2016/6/4 上午 12:00:00", Is.EqualTo(db.articles[0].time));
+            Assert.That(DateTime.Now.ToLongDateString().ToString(), Is.EqualTo(db.articles[0].time));
         }
 
         [Test]
