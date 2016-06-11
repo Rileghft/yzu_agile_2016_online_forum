@@ -80,7 +80,19 @@ namespace online_forum_backend
            // Assert.That(true, Is.EqualTo(result));
 
         }
+        [Test]
+        public void 非作者刪除文章_Action()
+        {
+            ForumDB db = new ForumDB();
+            Action register = new Action();
+            register.register(db, "hacker", "test123456", "test123456");
+            Assert.That(true,  Is.EqualTo(db.insertArticle("hacker", "bbb", "ccc")));          
+            Action delete = new Action();
 
+            bool result = delete.deleteArticle(db,0,db.accounts[0]);
+            Assert.That(false, Is.EqualTo(result));
+
+        }
         [Test]
         public void 編輯文章標題_Action()
         {

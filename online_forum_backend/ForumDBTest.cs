@@ -67,6 +67,7 @@ namespace online_forum_backend
         public void 刪除文章()
         {
             ForumDB db = new ForumDB();
+            Account user = db.getUser("teamD", "test");
            
             Assert.That(false, Is.EqualTo( db.deleteArticle(0) ));
  
