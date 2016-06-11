@@ -104,7 +104,30 @@ namespace online_forum_backend
             db.articles[articleID].title = title;
             return true;
         }
- 
+        
+        public List<Article> searchArticleTitle( ForumDB db, string searchKey )
+        {
+            List<Article> list = new List<Article>();
+            for (int i = 0; i < db.articles.Count; i++ )
+            {
+                if (db.articles[i].title.Contains(searchKey))
+                    list.Add(db.articles[i]);
+            }
+            
+            return list;
+        }
+
+        public List<Article> searchArticleContent(ForumDB db, string searchKey)
+        {
+            List<Article> list = new List<Article>();
+            for (int i = 0; i < db.articles.Count; i++)
+            {
+                if (db.articles[i].content.Contains(searchKey))
+                    list.Add(db.articles[i]);
+            }
+
+            return list;
+        }
 
     }
 }

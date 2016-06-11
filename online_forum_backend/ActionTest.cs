@@ -132,7 +132,7 @@ namespace online_forum_backend
         }
 
         [Test]
-        public void 登入()
+        public void 登入_Action()
         {
             ForumDB db = new ForumDB();
             Action action = new Action();
@@ -141,7 +141,7 @@ namespace online_forum_backend
         }
 
         [Test]
-        public void 登入失敗()
+        public void 登入失敗_Action()
         {
             ForumDB db = new ForumDB();
             Action action = new Action();
@@ -150,7 +150,7 @@ namespace online_forum_backend
         }
 
         [Test]
-        public void 登出()
+        public void 登出_Action()
         {
             ForumDB db = new ForumDB();
             Action action = new Action();
@@ -161,13 +161,60 @@ namespace online_forum_backend
             Assert.That(false, Is.EqualTo(action.loggedin));
         }
 
-         [Test]
-        public void 新增文章()
+        [Test]
+        public void 新增文章_Action()
         {
             ForumDB db = new ForumDB();
             db.insertArticle("teamD", "測試標題", "測試內容");
             Assert.That("測試標題", Is.EqualTo(db.getTitle(0)));
             //Assert.That("測試內容", Is.EqualTo(db.getArticle(0)));
+        }
+
+        [Test]
+        public void 搜尋文章標題_Action()
+        {
+            ForumDB db = new ForumDB();
+            db.insertArticle("teamD", "文章標題aa", "文章內容");
+            db.insertArticle("teamD", "文章標題aa2", "文章內容");
+            db.insertArticle("teamD", "文章標題bb", "文章內容");
+            db.insertArticle("teamD", "文章標題bb22", "文章內容");
+            db.insertArticle("teamD", "文章標題ccc", "文章內容");
+            Action action = new Action();
+            List<Article> tmp = action.searchArticleTitle(db, "aa");
+            Assert.That("文章標題aa", Is.EqualTo(tmp[0].title));
+            Assert.That("文章標題aa2", Is.EqualTo(tmp[1].title));
+
+            tmp = action.searchArticleTitle(db, "c");
+            Assert.That("文章標題ccc", Is.EqualTo(tmp[0].title));
+
+
+            tmp = action.searchArticleTitle(db, "2");
+            Assert.That("文章標題aa2", Is.EqualTo(tmp[0].title));
+            Assert.That("文章標題bb22", Is.EqualTo(tmp[1].title));
+        }
+
+        [Test]
+        public void 搜尋文章內容_Action()
+        {
+            ForumDB db = new ForumDB();
+            db.insertArticle("teamD", "文章標題aa", "文章內容aa");
+            db.insertArticle("teamD", "文章標題aa2", "文章內容aa2");
+            db.insertArticle("teamD", "文章標題bb", "文章內容bb");
+            db.insertArticle("teamD", "文章標題bb22", "文章內容bb22");
+            db.insertArticle("teamD", "文章標題ccc", "文章內容ccc");
+
+            Action action = new Action();
+            List<Article> tmp = action.searchArticleContent(db, "aa");
+            Assert.That("文章內容aa", Is.EqualTo(tmp[0].content));
+            Assert.That("文章內容aa2", Is.EqualTo(tmp[1].content));
+
+            tmp = action.searchArticleContent(db, "c");
+            Assert.That("文章內容ccc", Is.EqualTo(tmp[0].content));
+
+
+            tmp = action.searchArticleContent(db, "2");
+            Assert.That("文章內容aa2", Is.EqualTo(tmp[0].content));
+            Assert.That("文章內容bb22", Is.EqualTo(tmp[1].content));
         }
     }
 }
