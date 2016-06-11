@@ -165,9 +165,24 @@ namespace online_forum_backend
         public void 新增文章_Action()
         {
             ForumDB db = new ForumDB();
+            Action action = new Action();
             db.insertArticle("teamD", "測試標題", "測試內容");
             Assert.That("測試標題", Is.EqualTo(db.getTitle(0)));
-            //Assert.That("測試內容", Is.EqualTo(db.getArticle(0)));
+            Assert.That(true, Is.EqualTo(db.getArticle(0, "teamD", "測試標題", "測試內容")));
+            Assert.That("測試內容", Is.EqualTo(action.addArticle(db, db.accounts[0], "測試標題", "測試內容")));
+        }
+
+        [Test]
+        public void 新增评论_Action()
+        {
+            ForumDB db = new ForumDB();
+            Action action = new Action();
+            Article art = new Article();
+            db.insertArticle("teamD", "測試標題", "測試內容");
+            db.insertComment("測試內容","teamD",0);
+            List<Comment> match = db.getComment(0);
+            Assert.That("測試內容", Is.EqualTo(match[0].getContent()));
+            Assert.That("測試內容", Is.EqualTo(action.addComment(db,db.accounts[0],art,"測試內容")));
         }
 
         [Test]
