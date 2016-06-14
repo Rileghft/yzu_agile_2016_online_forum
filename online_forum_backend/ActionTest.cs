@@ -180,7 +180,7 @@ namespace online_forum_backend
             Action action = new Action();
             db.insertArticle("teamD", "測試標題", "測試內容");
             Assert.That("測試標題", Is.EqualTo(db.getTitle(0)));
-            Assert.That(true, Is.EqualTo(db.getArticle(0, "teamD", "測試標題", "測試內容")));
+            Assert.That("測試內容", Is.EqualTo(db.getArticle(0)));
             Assert.That("測試內容", Is.EqualTo(action.addArticle(db, db.accounts[0], "測試標題", "測試內容")));
         }
 
@@ -242,6 +242,26 @@ namespace online_forum_backend
             tmp = action.searchArticleContent(db, "2");
             Assert.That("文章內容aa2", Is.EqualTo(tmp[0].content));
             Assert.That("文章內容bb22", Is.EqualTo(tmp[1].content));
+        }
+
+        [Test]
+        public void 讀取文章測試()
+        {
+            ForumDB db = new ForumDB();
+            db.insertArticle("teamD", "文章標題aa", "文章內容aa");
+            db.insertArticle("teamD", "文章標題aa2", "文章內容aa2");
+            Action action = new Action();
+            action.getArticle(db,0);//第0篇文章讀取五次
+            action.getArticle(db,0);
+            action.getArticle(db,0);
+            action.getArticle(db,0);
+            action.getArticle(db,0);
+            action.getArticle(db,1);//第一篇文章讀取三次
+            action.getArticle(db,1);
+            action.getArticle(db,1);
+            Assert.That(5, Is.EqualTo(action.getReads(db,0)));
+            Assert.That(3, Is.EqualTo(action.getReads(db, 1)));
+            Assert.That(0, Is.EqualTo(action.getReads(db, 2)));//尚無第二篇文章，瀏覽次數0
         }
     }
 }

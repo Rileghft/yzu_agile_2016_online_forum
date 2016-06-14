@@ -155,5 +155,14 @@ namespace online_forum_backend
             return list;
         }
 
+        public string getArticle(ForumDB db, int articleID)
+        {
+            return db.getArticle(articleID);//透過資料庫動作讀取文章
+        }
+
+        public int getReads(ForumDB db, int articleID)
+        {
+            return db.getReads(articleID);//透過資料庫動作取得該篇文章讀取次數
+        }
     }
 }

@@ -14,10 +14,12 @@ namespace online_forum_backend
         public int articleID { get; set; }
         public string time { get; set; }
         public List<Comment> comment { get; set; }
-
+        public int read { get; set; } //該篇文章瀏覽次數
+   
         public Article()
         {
             comment = new List<Comment>();
+            read = 0;
         }
     }
 }

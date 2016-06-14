@@ -60,18 +60,17 @@ namespace online_forum_backend
             return isExist;
         }
 
-        internal bool getArticle(int id)
+        internal string getArticle(int id)
         {
-            if (id >= articles.Count)
-                return false;
             foreach (Article article in articles)
             {
                 if (article.articleID == id)
-                    article.content.ToString();
+                {
+                    article.read++;//抓取文章，則瀏覽次數加一
+                    return article.content.ToString();
+                }
             }
-
-            return true;
-
+            return "None";
         }
 
         internal bool  insertArticle( string account, string title, string content )
@@ -96,7 +95,7 @@ namespace online_forum_backend
         }
 
 
-        internal bool  getArticle( int id,string account, string title, string content /*,string time*/)
+        /*internal bool  getArticle( int id,string account, string title, string content ,string time)
         { 
             int i;
             for (i = 0; i < accounts.Count; i++)
@@ -113,7 +112,7 @@ namespace online_forum_backend
             //arti.time = time;
             return true;
 
-        }
+        }*/
 
         internal bool deleteArticle(int id)
         { // 如果沒有此文章id，回傳false
@@ -164,5 +163,17 @@ namespace online_forum_backend
             }
             return "None";
         }
+
+       internal int getReads(int n)
+       {
+           foreach (Article article in articles)
+           {
+
+               if (article.articleID == n)
+                   return article.read;
+
+           }
+           return 0;
+       }
     }
 }

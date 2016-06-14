@@ -118,7 +118,7 @@ namespace online_forum_backend
             ForumDB db = new ForumDB();
 
             db.insertArticle("teamD", "測試新文章標題", "測試文章內容");
-            Assert.That(true, Is.EqualTo(db.getArticle(0,"teamD", "測試新文章標題", "測試文章內容")));
+            //Assert.That("測試文章內容", Is.EqualTo(db.getArticle(0)));
             Assert.That("teamD", Is.EqualTo(db.articles[0].account));
             Assert.That("測試新文章標題", Is.EqualTo(db.articles[0].title));
             Assert.That("測試文章內容", Is.EqualTo(db.articles[0].content));
