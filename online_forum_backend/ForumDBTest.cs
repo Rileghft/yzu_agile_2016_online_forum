@@ -131,9 +131,9 @@ namespace online_forum_backend
          {
              ForumDB db = new ForumDB();
              db.insertArticle("teamD", "測試新文章標題", "測試文章內容");
-         //    db.insertArticle("teamD1", "測試新文章標題1", "測試文章內容1");
-               Assert.That("測試新文章標題", Is.EqualTo(db.articles[0].title));
-             //  Assert.That("測試新文章標題1", Is.EqualTo(db.articles[1].title));
+             Assert.That("測試新文章標題", Is.EqualTo(db.getTitle(0)));
+             Assert.That("None", Is.EqualTo(db.getTitle(1)));
+     
          }
     }
 }
