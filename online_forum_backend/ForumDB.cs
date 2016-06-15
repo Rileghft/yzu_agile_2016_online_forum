@@ -145,8 +145,7 @@ namespace online_forum_backend
             foreach (Article article in articles)
             {
                 if (article.articleID == articleID)
-                    return article.comment;
-                    
+                    return article.comment;                   
             }
             return empty;
         }
@@ -174,6 +173,19 @@ namespace online_forum_backend
 
            }
            return 0;
+       }
+       internal List<Collect> getcollect(int articleID)
+       {
+          
+      List<Collect> read = new List<Collect>();
+
+           foreach (Article article in articles)
+           {
+               if (article.articleID == articleID)
+                   return article.collect;
+           }                  
+           return read;
+           
        }
     }
 }

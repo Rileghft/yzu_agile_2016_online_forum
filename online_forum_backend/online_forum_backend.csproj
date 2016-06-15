@@ -65,6 +65,7 @@
     <Compile Include="Account.cs" />
     <Compile Include="Article.cs" />
     <Compile Include="Class1Test.cs" />
+    <Compile Include="Collect.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="ForumDB.cs" />
     <Compile Include="ForumDBTest.cs" />

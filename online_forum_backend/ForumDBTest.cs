@@ -94,6 +94,8 @@ namespace online_forum_backend
             Assert.That(0, Is.EqualTo(db.articles.Count));
 
         }
+    
+
 
         [Test]
         public void 插入顯示文章()
@@ -106,6 +108,7 @@ namespace online_forum_backend
             List<Comment> match = db.getComment(0);
             Assert.That("這篇文章很讚", Is.EqualTo(match[0].getContent()));
             Assert.That("這篇文章很無聊", Is.EqualTo(match[1].getContent()));
+           
 
             db.insertArticle("teamD", "測試新文章標題2", "測試文章內容2");//articleID 1
             db.insertComment("Cool", "Lee", 1);
