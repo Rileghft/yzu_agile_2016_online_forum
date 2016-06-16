@@ -25,5 +25,10 @@ namespace online_forum_backend
            // collect = new List<Collect>();
             read = 0;
         }
+
+        internal object getPattern()
+        {
+            return patterns;
+        }
     }
 }

@@ -145,7 +145,6 @@ namespace online_forum_backend
              db.insertArticle("teamD", "測試新文章標題", "測試摘要", "測試文章內容", "測試文章內圖片");
              Assert.That("測試文章內圖片", Is.EqualTo(db.articles[0].patterns));
              Assert.That(0, Is.EqualTo(db.articles[0].articleID));
-
          }
 
          [Test]
