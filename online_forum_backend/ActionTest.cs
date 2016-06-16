@@ -348,11 +348,11 @@ namespace online_forum_backend
         public void 搜尋文章摘要_Action()
         {
             ForumDB db = new ForumDB();
-            db.insertArticle("teamD", "文章標題aa", "測試摘要1a", "文章內容aa");
-            db.insertArticle("teamD", "文章標題aa2", "測試摘要1b", "文章內容aa2");
-            db.insertArticle("teamD", "文章標題bb", "測試摘要1c", "文章內容bb");
-            db.insertArticle("teamD", "文章標題bb22", "測試摘要2a", "文章內容bb22");
-            db.insertArticle("teamD", "文章標題ccc", "測試摘要2b", "文章內容ccc");
+            db.insertArticle("teamD", "文章標題aa", "測試摘要1a", "文章內容aa", "pictures");
+            db.insertArticle("teamD", "文章標題aa2", "測試摘要1b", "文章內容aa2", "pictures");
+            db.insertArticle("teamD", "文章標題bb", "測試摘要1c", "文章內容bb", "pictures");
+            db.insertArticle("teamD", "文章標題bb22", "測試摘要2a", "文章內容bb22", "pictures");
+            db.insertArticle("teamD", "文章標題ccc", "測試摘要2b", "文章內容ccc", "pictures");
 
             Action action = new Action();
             List<Article> tmp = action.searchArticleSummary(db, "1");
@@ -374,11 +374,11 @@ namespace online_forum_backend
         public void 搜尋文章All_Action()
         {
             ForumDB db = new ForumDB();
-            db.insertArticle("teamD", "文章標題aa", "測試摘要1a", "文章內容aa");
-            db.insertArticle("teamD", "文章標題aa2", "測試摘要1b", "文章內容aa3");
-            db.insertArticle("teamD", "文章標題bb", "測試摘要1c", "文章內容bb");
-            db.insertArticle("teamD", "文章標題bb22", "測試摘要2a", "文章內容bb33");
-            db.insertArticle("teamD", "文章標題ccc", "測試摘要2b", "文章內容ccc");
+            db.insertArticle("teamD", "文章標題aa", "測試摘要1a", "文章內容aa","pictures");
+            db.insertArticle("teamD", "文章標題aa2", "測試摘要1b", "文章內容aa3", "pictures");
+            db.insertArticle("teamD", "文章標題bb", "測試摘要1c", "文章內容bb", "pictures");
+            db.insertArticle("teamD", "文章標題bb22", "測試摘要2a", "文章內容bb33", "pictures");
+            db.insertArticle("teamD", "文章標題ccc", "測試摘要2b", "文章內容ccc", "pictures");
 
             Action action = new Action();
             List<Article> tmp = action.searchArticleAll(db, "1");
