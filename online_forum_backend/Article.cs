@@ -12,6 +12,7 @@ namespace online_forum_backend
         public string title { get; set; }
         public string summary { get; set; }
         public string content { get; set; }
+        public string patterns { get; set; }
         public int articleID { get; set; }
         public string time { get; set; }
         public List<Comment> comment { get; set; }

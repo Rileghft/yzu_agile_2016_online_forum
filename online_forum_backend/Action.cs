@@ -11,6 +11,7 @@ namespace online_forum_backend
     {
         public Account user;
         public bool loggedin;
+        private string pattern;
 
         public bool register(ForumDB db, string account, string password ,string cofirmpass)
         {
@@ -74,16 +75,17 @@ namespace online_forum_backend
             else
                 return false;
         }
+
         public string addArticle(ForumDB db, Account user, string title, string summary, string content)
         {
             string account = user.name;
-            if (!db.insertArticle(account, title, summary, content))
+            if (!db.insertArticle(account, title, summary, content, pattern))
             {
                 return "Error";
             }
             else
             {
-                db.insertArticle(account, title, summary, content);
+                db.insertArticle(account, title, summary, content, pattern);
                 return content;
             }
 
@@ -109,7 +111,7 @@ namespace online_forum_backend
             return result;
         }
 
-        public bool modifyArticleContent(ForumDB db, int articleID, Account user, string content)
+        public bool modifyArticleContent(ForumDB db, int articleID, Account user, string content,string patterns)
         {
             if (articleID >= db.articles.Count)
                 return false;
@@ -118,6 +120,7 @@ namespace online_forum_backend
                 return false;
 
             db.articles[articleID].content = content;
+            db.articles[articleID].patterns = patterns;
             return true;
         }
         
