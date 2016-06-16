@@ -109,6 +109,20 @@ namespace online_forum_backend
             }
 
         }
+        public bool deleteComment(ForumDB db, int articleID, Account user)
+        {
+            // 判斷刪除文章是否為作者本人
+            if (articleID >= db.articles.Count)
+                return false;
+
+            if (db.articles[articleID].account != (string)user.getName())
+                return false;
+
+            if (db.deleteComment((string)user.getName(), articleID))
+                return true;
+            else
+                return false;
+        }
 
         internal string getArticleHeaderList(ForumDB db,int ArticleID)
         {

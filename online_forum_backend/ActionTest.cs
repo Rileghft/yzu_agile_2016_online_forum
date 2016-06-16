@@ -80,6 +80,7 @@ namespace online_forum_backend
            // Assert.That(true, Is.EqualTo(result));
 
         }
+
         [Test]
         public void 非作者刪除文章_Action()
         {
@@ -311,6 +312,16 @@ namespace online_forum_backend
             List<Comment> match = db.getComment(0);
             Assert.That("測試內容", Is.EqualTo(match[0].getContent()));
             Assert.That("測試內容", Is.EqualTo(action.addComment(db,db.accounts[0],art,"測試內容")));
+        }
+        public void 刪除評論_Action()
+        {
+            ForumDB db = new ForumDB();
+            Action action = new Action();
+            Assert.That(false, Is.EqualTo(action.deleteComment(db, 0, db.accounts[0])));
+            db.insertArticle("teamD", "測試新文章標題", "測試摘要", "測試文章內容", "");
+            db.insertComment("測試評論內容", "teamD", 0);
+            Assert.That(true, Is.EqualTo(action.deleteComment(db,0,db.accounts[0])));
+
         }
 
         [Test]

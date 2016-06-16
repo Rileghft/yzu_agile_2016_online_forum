@@ -130,7 +130,23 @@ namespace online_forum_backend
             }
             return empty;
         }
-   
+        internal bool deleteComment(string userName, int articleID)
+        { // 如果沒有此文章id，回傳false
+            if (articleID >= articles.Count)
+                return false;
+            Comment user = new Comment();
+            user.setAccount(userName);
+            foreach (Article article in articles)
+            {
+                if (article.articleID == articleID)
+                {
+                    article.comment.Remove(user);
+                    return true;
+                }
+
+            }
+            return false;
+        }
         internal string getTitle(int n)
         {
             foreach (Article article in articles)

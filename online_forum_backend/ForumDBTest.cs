@@ -101,8 +101,28 @@ namespace online_forum_backend
             Assert.That(0, Is.EqualTo(db.articles.Count));
 
         }
-    
 
+        [Test]
+        public void 刪除評論()
+        {
+            ForumDB db = new ForumDB();
+            Account user = db.getUser("teamD", "test");
+
+            Assert.That(false, Is.EqualTo(db.deleteComment("teamD", 0)));
+
+            db.insertArticle("teamD", "測試新文章標題", "測試摘要", "測試文章內容","");
+            db.insertArticle("teamD", "測試新文章標題2", "測試摘要2", "測試文章內容2","");
+            db.insertArticle("teamA", "測試新文章標題3", "測試摘要3", "測試文章內容3","");
+            db.insertComment("測試評論內容", "teamD", 0);
+            db.insertComment("測試評論內容1", "teamD", 1);
+            //db.insertComment("測試評論內容2", "teamD", 2);
+
+            Assert.That(true, Is.EqualTo(db.deleteComment("teamD", 0)));
+            Assert.That(true, Is.EqualTo(db.deleteComment("teamD", 1)));
+
+            Assert.That(false, Is.EqualTo(db.deleteComment("teamA", 2)));
+
+        }
 
         [Test]
         public void 插入顯示文章()
