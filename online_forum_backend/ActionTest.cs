@@ -53,7 +53,7 @@ namespace online_forum_backend
         {
             ForumDB db = new ForumDB();
             Action Title = new Action();
-            db.insertArticle("teamD","For_Test","Hello world");
+            db.insertArticle("teamD", "For_Test", "測試摘要", "Hello world");
             string result = Title.getArticleHeaderList(db,0);
             Assert.That("For_Test", Is.EqualTo(result));
         }
@@ -63,7 +63,7 @@ namespace online_forum_backend
         {
             ForumDB db = new ForumDB();
             Action Title = new Action();
-            db.insertArticle("teamD", "For_Test", "Hello world");
+            db.insertArticle("teamD", "For_Test", "測試摘要", "Hello world");
             string result = Title.getArticleHeaderList(db, 1);
             Assert.That(DateTime.Now.ToLongDateString().ToString(), Is.EqualTo(db.articles[0].time));
         }
@@ -72,7 +72,7 @@ namespace online_forum_backend
         public void 刪除文章_Action()
         {
             ForumDB db = new ForumDB();
-            Assert.That(true,  Is.EqualTo(db.insertArticle("teamD", "bbb", "ccc")));          
+            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "bbb", "測試摘要", "ccc")));          
             Action delete = new Action();
 
             bool result = delete.deleteArticle(db,0,db.accounts[0]);
@@ -86,7 +86,7 @@ namespace online_forum_backend
             ForumDB db = new ForumDB();
             Action register = new Action();
             register.register(db, "hacker", "test123456", "test123456");
-            Assert.That(true,  Is.EqualTo(db.insertArticle("hacker", "bbb", "ccc")));          
+            Assert.That(true, Is.EqualTo(db.insertArticle("hacker", "bbb", "測試摘要", "ccc")));          
             Action delete = new Action();
 
             bool result = delete.deleteArticle(db,0,db.accounts[0]);
@@ -97,23 +97,54 @@ namespace online_forum_backend
         public void 編輯文章標題_Action()
         {
             ForumDB db = new ForumDB();
-            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "文章標題", "文章內容")));
-            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "文章標題22", "文章內容22")));
+            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "文章標題", "測試摘要", "文章內容")));
+            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "文章標題22", "測試摘要22", "文章內容22")));
             Action action = new Action();
 
             bool result = action.modifyArticleTitle(db, 0, db.accounts[0], "更新文章標題");
             Assert.That(true, Is.EqualTo(result));
             Assert.That("更新文章標題", Is.EqualTo(db.articles[0].title));
+            Assert.That("測試摘要", Is.EqualTo(db.articles[0].summary));
             Assert.That("文章內容"    , Is.EqualTo(db.articles[0].content));
 
             result = action.modifyArticleTitle(db, 0, db.accounts[0], "更新第二次文章標題");
             Assert.That(true, Is.EqualTo(result));
             Assert.That("更新第二次文章標題", Is.EqualTo(db.articles[0].title));
+            Assert.That("測試摘要", Is.EqualTo(db.articles[0].summary));
             Assert.That("文章內容", Is.EqualTo(db.articles[0].content));
 
             result = action.modifyArticleTitle(db, 1, db.accounts[0], "更新文章標題22");
             Assert.That(true, Is.EqualTo(result));
             Assert.That("更新文章標題22", Is.EqualTo(db.articles[1].title));
+            Assert.That("測試摘要22", Is.EqualTo(db.articles[1].summary));
+            Assert.That("文章內容22", Is.EqualTo(db.articles[1].content));
+
+        }
+
+        [Test]
+        public void 編輯文章摘要_Action()
+        {
+            ForumDB db = new ForumDB();
+            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "文章標題", "測試摘要", "文章內容")));
+            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "文章標題22", "測試摘要22", "文章內容22")));
+            Action action = new Action();
+
+            bool result = action.modifyArticleSummary(db, 0, db.accounts[0], "更新文章摘要");
+            Assert.That(true, Is.EqualTo(result));
+            Assert.That("文章標題"          , Is.EqualTo(db.articles[0].title));
+            Assert.That("更新文章摘要"      , Is.EqualTo(db.articles[0].summary));
+            Assert.That("文章內容", Is.EqualTo(db.articles[0].content));
+
+            result = action.modifyArticleSummary(db, 0, db.accounts[0], "更新第二次文章摘要");
+            Assert.That(true, Is.EqualTo(result));
+            Assert.That("文章標題"          , Is.EqualTo(db.articles[0].title));
+            Assert.That("更新第二次文章摘要", Is.EqualTo(db.articles[0].summary));
+            Assert.That("文章內容", Is.EqualTo(db.articles[0].content));
+
+            result = action.modifyArticleSummary(db, 1, db.accounts[0], "更新文章摘要22");
+            Assert.That(true, Is.EqualTo(result));
+            Assert.That("文章標題22"        , Is.EqualTo(db.articles[1].title));
+            Assert.That("更新文章摘要22"    , Is.EqualTo(db.articles[1].summary));
             Assert.That("文章內容22", Is.EqualTo(db.articles[1].content));
 
         }
@@ -122,26 +153,30 @@ namespace online_forum_backend
         public void 編輯文章內容_Action()
         {
             ForumDB db = new ForumDB();
-            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "文章標題", "文章內容")));
-            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "文章標題22", "文章內容22")));
+            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "文章標題", "測試摘要", "文章內容")));
+            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "文章標題22", "測試摘要22", "文章內容22")));
             Action action = new Action();
 
             bool result = action.modifyArticleContent(db, 0, db.accounts[0], "更新文章內容");
             Assert.That(true, Is.EqualTo(result));
             Assert.That("文章標題"    , Is.EqualTo(db.articles[0].title));
+            Assert.That("測試摘要", Is.EqualTo(db.articles[0].summary));
             Assert.That("更新文章內容", Is.EqualTo(db.articles[0].content));
 
             result = action.modifyArticleContent(db, 0, db.accounts[0], "更新第二次文章內容");
             Assert.That(true, Is.EqualTo(result));
             Assert.That("文章標題"         , Is.EqualTo(db.articles[0].title));
+            Assert.That("測試摘要", Is.EqualTo(db.articles[0].summary));
             Assert.That("更新第二次文章內容", Is.EqualTo(db.articles[0].content));
 
             result = action.modifyArticleContent(db, 1, db.accounts[0], "更新文章內容22");
             Assert.That(true, Is.EqualTo(result));
             Assert.That("文章標題22"    , Is.EqualTo(db.articles[1].title));
+            Assert.That("測試摘要22", Is.EqualTo(db.articles[1].summary));
             Assert.That("更新文章內容22", Is.EqualTo(db.articles[1].content));
 
         }
+
 
         [Test]
         public void 登入_Action()
@@ -178,10 +213,10 @@ namespace online_forum_backend
         {
             ForumDB db = new ForumDB();
             Action action = new Action();
-            db.insertArticle("teamD", "測試標題", "測試內容");
+            db.insertArticle("teamD", "測試標題", "測試摘要22", "測試內容");
             Assert.That("測試標題", Is.EqualTo(db.getTitle(0)));
             Assert.That("測試內容", Is.EqualTo(db.getArticle(0)));
-            Assert.That("測試內容", Is.EqualTo(action.addArticle(db, db.accounts[0], "測試標題", "測試內容")));
+            Assert.That("測試內容", Is.EqualTo(action.addArticle(db, db.accounts[0], "測試標題", "測試摘要", "測試內容")));
         }
 
         [Test]
@@ -190,7 +225,7 @@ namespace online_forum_backend
             ForumDB db = new ForumDB();
             Action action = new Action();
             Article art = new Article();
-            db.insertArticle("teamD", "測試標題", "測試內容");
+            db.insertArticle("teamD", "測試標題", "測試摘要", "測試內容");
             db.insertComment("測試內容","teamD",0);
             List<Comment> match = db.getComment(0);
             Assert.That("測試內容", Is.EqualTo(match[0].getContent()));
@@ -201,11 +236,11 @@ namespace online_forum_backend
         public void 搜尋文章標題_Action()
         {
             ForumDB db = new ForumDB();
-            db.insertArticle("teamD", "文章標題aa", "文章內容");
-            db.insertArticle("teamD", "文章標題aa2", "文章內容");
-            db.insertArticle("teamD", "文章標題bb", "文章內容");
-            db.insertArticle("teamD", "文章標題bb22", "文章內容");
-            db.insertArticle("teamD", "文章標題ccc", "文章內容");
+            db.insertArticle("teamD", "文章標題aa", "測試摘要", "文章內容");
+            db.insertArticle("teamD", "文章標題aa2", "測試摘要", "文章內容");
+            db.insertArticle("teamD", "文章標題bb", "測試摘要", "文章內容");
+            db.insertArticle("teamD", "文章標題bb22", "測試摘要", "文章內容");
+            db.insertArticle("teamD", "文章標題ccc", "測試摘要", "文章內容");
             Action action = new Action();
             List<Article> tmp = action.searchArticleTitle(db, "aa");
             Assert.That("文章標題aa", Is.EqualTo(tmp[0].title));
@@ -224,11 +259,11 @@ namespace online_forum_backend
         public void 搜尋文章內容_Action()
         {
             ForumDB db = new ForumDB();
-            db.insertArticle("teamD", "文章標題aa", "文章內容aa");
-            db.insertArticle("teamD", "文章標題aa2", "文章內容aa2");
-            db.insertArticle("teamD", "文章標題bb", "文章內容bb");
-            db.insertArticle("teamD", "文章標題bb22", "文章內容bb22");
-            db.insertArticle("teamD", "文章標題ccc", "文章內容ccc");
+            db.insertArticle("teamD", "文章標題aa", "測試摘要", "文章內容aa");
+            db.insertArticle("teamD", "文章標題aa2", "測試摘要", "文章內容aa2");
+            db.insertArticle("teamD", "文章標題bb", "測試摘要", "文章內容bb");
+            db.insertArticle("teamD", "文章標題bb22", "測試摘要", "文章內容bb22");
+            db.insertArticle("teamD", "文章標題ccc", "測試摘要", "文章內容ccc");
 
             Action action = new Action();
             List<Article> tmp = action.searchArticleContent(db, "aa");
@@ -248,8 +283,8 @@ namespace online_forum_backend
         public void 讀取文章測試()
         {
             ForumDB db = new ForumDB();
-            db.insertArticle("teamD", "文章標題aa", "文章內容aa");
-            db.insertArticle("teamD", "文章標題aa2", "文章內容aa2");
+            db.insertArticle("teamD", "文章標題aa", "測試摘要", "文章內容aa");
+            db.insertArticle("teamD", "文章標題aa2", "測試摘要", "文章內容aa2");
             Action action = new Action();
             action.getArticle(db,0);//第0篇文章讀取五次
             action.getArticle(db,0);

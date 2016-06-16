@@ -65,8 +65,8 @@ namespace online_forum_backend
             // 判斷刪除文章是否為作者本人
             if (articleID >= db.articles.Count)
                 return false;
-
-            if (db.articles[articleID].account != user.getName())
+            
+            if (db.articles[articleID].account != (string)user.getName())
                 return false;
 
             if (db.deleteArticle(articleID))
@@ -74,16 +74,16 @@ namespace online_forum_backend
             else
                 return false;
         }
-        public string addArticle(ForumDB db, Account user,string title,string content)
+        public string addArticle(ForumDB db, Account user, string title, string summary, string content)
         {
             string account = user.name;
-            if (!db.insertArticle(account, title, content))
+            if (!db.insertArticle(account, title, summary, content))
             {
                 return "Error";
             }
             else
             {
-                db.insertArticle(account, title, content);
+                db.insertArticle(account, title, summary, content);
                 return content;
             }
 
@@ -114,7 +114,7 @@ namespace online_forum_backend
             if (articleID >= db.articles.Count)
                 return false;
 
-            if (db.articles[articleID].account != user.getName())
+            if (db.articles[articleID].account != (string)user.getName())
                 return false;
 
             db.articles[articleID].content = content;
@@ -125,12 +125,22 @@ namespace online_forum_backend
         {
             if (articleID >= db.articles.Count)
                return false;
-            if (db.articles[articleID].account != user.getName())
+            if (db.articles[articleID].account != (string)user.getName())
                return false;
             db.articles[articleID].title = title;
             return true;
         }
-        
+
+        public bool modifyArticleSummary(ForumDB db, int articleID, Account user, string summary)
+        {
+            if (articleID >= db.articles.Count)
+                return false;
+            if (db.articles[articleID].account != (string)user.getName())
+                return false;
+            db.articles[articleID].summary = summary;
+            return true;
+        }
+
         public List<Article> searchArticleTitle( ForumDB db, string searchKey )
         {
             List<Article> list = new List<Article>();

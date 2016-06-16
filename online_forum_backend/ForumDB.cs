@@ -46,7 +46,6 @@ namespace online_forum_backend
             else return false;
         }
 
-
         internal bool isLogin(Account user)
         {
             bool isExist = false;
@@ -73,7 +72,7 @@ namespace online_forum_backend
             return "None";
         }
 
-        internal bool  insertArticle( string account, string title, string content )
+        internal bool insertArticle(string account, string title, string summary, string content)
         { // 如果沒有這個帳戶使用者，回傳false
             int i;
             for (i = 0; i < accounts.Count; i++)
@@ -87,32 +86,13 @@ namespace online_forum_backend
             arti.account = account;
             arti.title = title;
             arti.content = content;
+            arti.summary = summary;
             arti.articleID = id;
             //DateTime thisDay = DateTime.Today;
             arti.time = DateTime.Now.ToLongDateString().ToString();
             articles.Add(arti);
             return true;
         }
-
-
-        /*internal bool  getArticle( int id,string account, string title, string content ,string time)
-        { 
-            int i;
-            for (i = 0; i < accounts.Count; i++)
-                if (accounts[i].name == account)
-                    break;
-            if (i == accounts.Count)
-                return false;
-
-            Article arti = new Article();
-            arti.account = account;
-            arti.title = title;
-            arti.content = content;
-            arti.articleID = id;
-            //arti.time = time;
-            return true;
-
-        }*/
 
         internal bool deleteArticle(int id)
         { // 如果沒有此文章id，回傳false
@@ -150,8 +130,7 @@ namespace online_forum_backend
             return empty;
         }
    
-
-       internal string getTitle(int n)
+        internal string getTitle(int n)
         {
             foreach (Article article in articles)
             {
@@ -163,7 +142,7 @@ namespace online_forum_backend
             return "None";
         }
 
-       internal int getReads(int n)
+        internal int getReads(int n)
        {
            foreach (Article article in articles)
            {
@@ -174,7 +153,7 @@ namespace online_forum_backend
            }
            return 0;
        }
-       internal List<Collect> getcollect(int articleID)
+        internal List<Collect> getcollect(int articleID)
        {
           
       List<Collect> read = new List<Collect>();
