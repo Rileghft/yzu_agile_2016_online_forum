@@ -120,6 +120,27 @@ namespace online_forum_backend
             Assert.That("文章內容22", Is.EqualTo(db.articles[1].content));
 
         }
+        [Test]
+        public void 非作者編輯文章標題_Action()
+        {
+            ForumDB db = new ForumDB();
+            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "文章標題", "測試摘要", "文章內容")));
+            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "文章標題22", "測試摘要22", "文章內容22")));
+            Action action = new Action();
+
+            Account not_author = new Account(1);
+            not_author.name = "not_author";
+            not_author.password = "pw";
+
+            bool result = action.modifyArticleTitle(db, 0, not_author, "更新文章標題");
+            Assert.That(false, Is.EqualTo(result));
+
+            result = action.modifyArticleTitle(db, 0, not_author, "更新第二次文章標題");
+            Assert.That(false, Is.EqualTo(result));
+
+            result = action.modifyArticleTitle(db, 1, not_author, "更新文章標題22");
+            Assert.That(false, Is.EqualTo(result));
+        }
 
         [Test]
         public void 編輯文章摘要_Action()
@@ -147,6 +168,27 @@ namespace online_forum_backend
             Assert.That("更新文章摘要22"    , Is.EqualTo(db.articles[1].summary));
             Assert.That("文章內容22", Is.EqualTo(db.articles[1].content));
 
+        }
+        [Test]
+        public void 非作者編輯文章摘要_Action()
+        {
+            ForumDB db = new ForumDB();
+            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "文章標題", "測試摘要", "文章內容")));
+            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "文章標題22", "測試摘要22", "文章內容22")));
+            Action action = new Action();
+
+            Account not_author = new Account(1);
+            not_author.name = "not_author";
+            not_author.password = "pw";
+
+            bool result = action.modifyArticleSummary(db, 0, not_author, "更新文章摘要");
+            Assert.That(false, Is.EqualTo(result));
+
+            result = action.modifyArticleSummary(db, 0, not_author, "更新第二次文章摘要");
+            Assert.That(false, Is.EqualTo(result));
+
+            result = action.modifyArticleSummary(db, 1, not_author, "更新文章摘要22");
+            Assert.That(false, Is.EqualTo(result));
         }
 
         [Test]
@@ -176,7 +218,27 @@ namespace online_forum_backend
             Assert.That("更新文章內容22", Is.EqualTo(db.articles[1].content));
 
         }
+        [Test]
+        public void 非作者編輯文章內容_Action()
+        {
+            ForumDB db = new ForumDB();
+            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "文章標題", "測試摘要", "文章內容")));
+            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "文章標題22", "測試摘要22", "文章內容22")));
+            Action action = new Action();
 
+            Account not_author = new Account(1);
+            not_author.name = "not_author";
+            not_author.password = "pw";
+
+            bool result = action.modifyArticleContent(db, 0, not_author, "更新文章內容");
+            Assert.That(false, Is.EqualTo(result));
+
+            result = action.modifyArticleContent(db, 0, not_author, "更新第二次文章內容");
+            Assert.That(false, Is.EqualTo(result));
+
+            result = action.modifyArticleContent(db, 1, not_author, "更新文章內容22");
+            Assert.That(false, Is.EqualTo(result));
+        }
 
         [Test]
         public void 登入_Action()
