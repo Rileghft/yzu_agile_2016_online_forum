@@ -14,6 +14,7 @@ namespace online_forum_backend
         public string content { get; set; }
         public string patterns { get; set; }
         public int articleID { get; set; }
+        public string type { get; set; }
         public string time { get; set; }
         public List<Comment> comment { get; set; }
         public List<Collect> collect { get; set; }
@@ -22,7 +23,8 @@ namespace online_forum_backend
         public Article()
         {
             comment = new List<Comment>();
-           // collect = new List<Collect>();
+            // collect = new List<Collect>();
+            type = "unknown";
             read = 0;
         }
 

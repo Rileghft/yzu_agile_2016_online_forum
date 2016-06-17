@@ -72,7 +72,20 @@ namespace online_forum_backend
             return "None";
         }
 
-        internal bool insertArticle(string account, string title, string summary, string content,string pattern)
+        internal List<Article> getTypeArticles(string type = "unknown")
+        {
+            List<Article> TypeArticles = new List<Article>();
+            foreach (Article article in articles)
+            {
+                if(article.type.Equals(type) || type.Equals("unknown"))
+                {
+                    TypeArticles.Add(article);
+                }
+            }
+            return TypeArticles;
+        }
+
+        internal bool insertArticle(string account, string title, string summary, string content,string pattern, string type = "unknown")
         { // 如果沒有這個帳戶使用者，回傳false
             int i;
             for (i = 0; i < accounts.Count; i++)
@@ -89,6 +102,7 @@ namespace online_forum_backend
             arti.patterns = pattern;
             arti.summary = summary;
             arti.articleID = id;
+            arti.type = type;
             //DateTime thisDay = DateTime.Today;
             arti.time = DateTime.Now.ToLongDateString().ToString();
             articles.Add(arti);
@@ -184,9 +198,5 @@ namespace online_forum_backend
            
        }
 
-        internal void insertArticle(string p1, string p2, string p3, string p4)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

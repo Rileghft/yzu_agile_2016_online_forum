@@ -468,5 +468,19 @@ namespace online_forum_backend
             GetScore.addComment(db, db.accounts[0], db.articles[0], "Comment_Test3");
             Assert.That(3, Is.EqualTo(db.accounts[0].score));
         }
+
+        [Test]
+        public void 取得特定類別文章()
+        {
+            ForumDB db = new ForumDB();
+            Action action = new Action();
+            db.insertArticle("teamD", "g1", "abstract", "content", "pic", "game");
+            db.insertArticle("teamD", "g2", "abstract", "content", "pic", "game");
+            db.insertArticle("teamD", "p3", "abstract", "content", "pic", "plant");
+            List<Article> articles = action.getTypeArticles(db, "game");
+            Assert.That(2, Is.EqualTo(articles.Count));
+            Assert.That(true, Is.EqualTo(articles[0].title.Equals("g1")));
+            Assert.That(true, Is.EqualTo(articles[1].title.Equals("g2")));
+        }
     }
 }

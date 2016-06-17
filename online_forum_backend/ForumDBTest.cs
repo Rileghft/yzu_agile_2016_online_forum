@@ -176,5 +176,32 @@ namespace online_forum_backend
              Assert.That("None", Is.EqualTo(db.getTitle(1)));
      
          }
+
+        [Test]
+        public void 新增文章的類別屬性()
+        {
+            ForumDB db = new ForumDB();
+
+            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "diablo3", "abstract1", "content1", "picture1", "game")));
+            Assert.That("teamD"           , Is.EqualTo(db.articles[0].account));
+            Assert.That("diablo3"  , Is.EqualTo(db.articles[0].title));
+            Assert.That("abstract1"        , Is.EqualTo(db.articles[0].summary));
+            Assert.That("content1"    , Is.EqualTo(db.articles[0].content));
+            Assert.That("picture1"        , Is.EqualTo(db.articles[0].patterns));
+            Assert.That("game", Is.EqualTo(db.articles[0].type));
+            Assert.That(0                 , Is.EqualTo(db.articles[0].articleID));
+            Assert.That(DateTime.Now.ToLongDateString().ToString(), Is.EqualTo(db.articles[0].time));
+
+            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "flower", "abstract2", "content2", "picture2", "plant")));
+            Assert.That("teamD"           , Is.EqualTo(db.articles[1].account));
+            Assert.That("flower" , Is.EqualTo(db.articles[1].title));
+            Assert.That("abstract2"       , Is.EqualTo(db.articles[1].summary));
+            Assert.That("content2"   , Is.EqualTo(db.articles[1].content));
+            Assert.That("picture2", Is.EqualTo(db.articles[1].patterns));
+            Assert.That("plant", Is.EqualTo(db.articles[1].type));
+            Assert.That(1                 , Is.EqualTo(db.articles[1].articleID));
+            Assert.That(DateTime.Now.ToLongDateString().ToString(), Is.EqualTo(db.articles[1].time));
+
+        }
     }
 }

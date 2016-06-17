@@ -220,6 +220,11 @@ namespace online_forum_backend
             return db.getArticle(articleID);//透過資料庫動作讀取文章
         }
 
+        public List<Article> getTypeArticles(ForumDB db, string type)
+        {
+            return db.getTypeArticles("game");
+        }
+
         public int getReads(ForumDB db, int articleID)
         {
             return db.getReads(articleID);//透過資料庫動作取得該篇文章讀取次數
