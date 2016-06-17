@@ -69,6 +69,17 @@ namespace online_forum_backend
         }
 
         [Test]
+        public void 根據時間順序排列帖子_Action()
+        {
+            ForumDB db = new ForumDB();
+            Action Title = new Action();
+            db.insertArticle("teamD", "For_Test", "測試摘要", "Hello world", "pictures");
+            string result = Title.getArticleHeaderList(db, 0);
+            Assert.That(DateTime.Now.ToLongDateString().ToString(), Is.EqualTo(db.articles[0].time));
+            Assert.That("For_Test", Is.EqualTo(result));
+        }
+
+        [Test]
         public void 刪除文章_Action()
         {
             ForumDB db = new ForumDB();
