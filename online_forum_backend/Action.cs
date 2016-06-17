@@ -92,8 +92,11 @@ namespace online_forum_backend
         }
         public bool insert_Patterns_into_Article(ForumDB db, int articleID, string patterns)
         {
-            db.articles[articleID].patterns = patterns;
-            return true;
+            if (patterns == null)
+                return false;
+            else
+                db.articles[articleID].patterns = patterns;
+                return true;
         }
 
         public string addComment(ForumDB db, Account user, Article art,string content)

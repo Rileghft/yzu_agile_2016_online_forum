@@ -247,8 +247,20 @@ namespace online_forum_backend
             Assert.That("測試摘要", Is.EqualTo(db.articles[0].summary));
             Assert.That("文章內容", Is.EqualTo(db.articles[0].content));
             Assert.That("向文章內插入圖片", Is.EqualTo(db.articles[0].patterns));
-
         }
+
+        [Test]
+        public void 向文章中插入圖片失败_Action()
+        {
+            ForumDB db = new ForumDB();
+            Assert.That(true, Is.EqualTo(db.insertArticle("teamD", "文章標題", "測試摘要", "文章內容", "")));
+            Action action = new Action();
+
+            bool result = action.insert_Patterns_into_Article(db, 0, null);
+            Assert.That(false, Is.EqualTo(result));
+            Assert.That("", Is.EqualTo(db.articles[0].patterns));
+        }
+
         [Test]
         public void 非作者編輯文章內容_Action()
         {
