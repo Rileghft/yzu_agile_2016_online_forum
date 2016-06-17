@@ -97,6 +97,7 @@ namespace online_forum_backend
             else
                 db.articles[articleID].patterns = patterns;
                 return true;
+
         }
 
         public string addComment(ForumDB db, Account user, Article art,string content)
