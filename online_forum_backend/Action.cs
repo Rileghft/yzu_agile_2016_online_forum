@@ -105,6 +105,7 @@ namespace online_forum_backend
             else
             {
                 db.insertComment(content, user.name, art.articleID);
+                user.score++;
                 return content;
             }
 

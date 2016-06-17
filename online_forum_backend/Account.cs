@@ -7,6 +7,7 @@ namespace online_forum_backend
         private int userID { get; set; }
         public String name { get; set; }
         public String password { get; set; }
+        public int score;
 
         public Account(int id)
         {

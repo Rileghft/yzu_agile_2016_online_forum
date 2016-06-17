@@ -444,5 +444,27 @@ namespace online_forum_backend
             Assert.That(3, Is.EqualTo(action.getReads(db, 1)));
             Assert.That(0, Is.EqualTo(action.getReads(db, 2)));//尚無第二篇文章，瀏覽次數0
         }
+
+        [Test]
+        public void 取得積分()
+        {
+            ForumDB db = new ForumDB();
+            Action GetScore = new Action();
+            db.insertArticle("teamD", "Test", "Test", "Test", "Test");
+            GetScore.addComment(db,db.accounts[0],db.articles[0],"Comment_Test");
+            Assert.That(1, Is.EqualTo(db.accounts[0].score));
+        }
+
+        [Test]
+        public void 取得積分_累加()
+        {
+            ForumDB db = new ForumDB();
+            Action GetScore = new Action();
+            db.insertArticle("teamD", "Test", "Test", "Test", "Test");
+            GetScore.addComment(db, db.accounts[0], db.articles[0], "Comment_Test");
+            GetScore.addComment(db, db.accounts[0], db.articles[0], "Comment_Test2");
+            GetScore.addComment(db, db.accounts[0], db.articles[0], "Comment_Test3");
+            Assert.That(3, Is.EqualTo(db.accounts[0].score));
+        }
     }
 }
